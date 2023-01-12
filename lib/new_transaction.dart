@@ -40,61 +40,63 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF757575),
+    return SingleChildScrollView(
       child: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        ),
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              autofocus: true,
-              decoration: const InputDecoration(labelText: 'Title'),
-              controller: titleController,
-              onSubmitted: (_) {
-                submitData(context);
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Amount'),
-              keyboardType: TextInputType.number,
-              controller: priceController,
-              onSubmitted: (_) {
-                submitData(context);
-              },
-            ),
-            Container(
-              height: 50,
-              child: Row(
-                children: [
-                  Text(
-                    DateFormat.yMMMMEEEEd().format(date),
-                    style: const TextStyle(
-                        color: Colors.purple, fontWeight: FontWeight.w500),
-                  ),
-                  TextButton(
-                      onPressed: presentDatePicker,
-                      child: const Text(
-                        'Change Date',
-                        style: TextStyle(color: Colors.blue),
-                      ))
-                ],
-              ),
-            ),
-            ElevatedButton(
-                onPressed: () {
+        color: const Color(0xFF757575),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          ),
+          padding: EdgeInsets.only(left: 20,right: 20, top: 20, bottom: MediaQuery.of(context).viewInsets.bottom + 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                autofocus: true,
+                decoration: const InputDecoration(labelText: 'Title'),
+                controller: titleController,
+                onSubmitted: (_) {
                   submitData(context);
                 },
-                child: const Text(
-                  'Add Transaction',
-                  style: TextStyle(color: Colors.white),
-                )),
-          ],
+              ),
+              TextField(
+                decoration: const InputDecoration(labelText: 'Amount'),
+                keyboardType: TextInputType.number,
+                controller: priceController,
+                onSubmitted: (_) {
+                  submitData(context);
+                },
+              ),
+              Container(
+                height: 50,
+                child: Row(
+                  children: [
+                    Text(
+                      DateFormat.yMMMMEEEEd().format(date),
+                      style: const TextStyle(
+                          color: Colors.purple, fontWeight: FontWeight.w500),
+                    ),
+                    TextButton(
+                        onPressed: presentDatePicker,
+                        child: const Text(
+                          'Change Date',
+                          style: TextStyle(color: Colors.blue),
+                        ))
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    submitData(context);
+                  },
+                  child: const Text(
+                    'Add Transaction',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ],
+          ),
         ),
       ),
     );
