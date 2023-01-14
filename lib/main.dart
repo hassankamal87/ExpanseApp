@@ -82,9 +82,10 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.purple,
       ),
       home: Builder(builder: (BuildContext context) {
-        final bool isLandScape = Orientation.landscape == MediaQuery.of(context).orientation;
+        final mediaQuery = MediaQuery.of(context);
+        final bool isLandScape = Orientation.landscape == mediaQuery.orientation;
         final txListView =Container(
-            height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.8,
+            height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.8,
             child: TransactionList(transactions, deleteTransaction));
         return Scaffold(
           appBar: AppBar(
@@ -108,7 +109,7 @@ class _MyAppState extends State<MyApp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Show Chart'),
-                    Switch(value: showChart, onChanged: (val){
+                    Switch.adaptive(value: showChart, onChanged: (val){
                       setState(() {
                         showChart = val;
                       });
@@ -116,11 +117,11 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 if(isLandScape) transactions.isNotEmpty? showChart? Container(
-                    height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+                    height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
                     child: Card(
                         child: Chart(recentTransactions))):txListView : txListView,
                 if(!isLandScape) transactions.isNotEmpty ?Container(
-                    height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.2,
+                    height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.2,
                     child: Card(
                         child: Chart(recentTransactions))) : Container(),
                 if(!isLandScape) txListView
